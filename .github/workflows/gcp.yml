@@ -45,9 +45,12 @@ jobs:
 
       - name: Create Secrets
         env:
-          KEYCLOAK_CLIENT_SECRET: ${{ secrets.KEYCLOAK_CLIENT_SECRET }}
-          KEYCLOAK_PASSWORD: ${{ secrets.KEYCLOAK_PASSWORD }}
           MONGO_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_SSL_PORT: ${{ secrets.SMTP_SSL_PORT }}
+          SMTP_SENDER: ${{ secrets.SMTP_SENDER }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: |-
           kubectl delete secret notification-secret --ignore-not-found=true -n sima
           kubectl create secret generic notification-secret \
