@@ -52,10 +52,13 @@ jobs:
           SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
         run: |-
-          echo $SMTP_SERVER
           kubectl delete secret notification-secret --ignore-not-found=true -n sima
           kubectl create secret generic notification-secret \
-            --from-literal=SMTP_SERVER="$SMTP_SERVER" \
+            --from-literal=SMTP_SERVER=$SMTP_SERVER \
+            --from-literal=SMTP_SSL_PORT=$SMTP_SSL_PORT \
+            --from-literal=SMTP_SENDER=$SMTP_SENDER \
+            --from-literal=SMTP_USERNAME=$SMTP_USERNAME \
+            --from-literal=SMTP_PASSWORD=$SMTP_PASSWORD \
             --from-literal=MONGO_HOST=mongodb.mongo.svc.cluster.local \
             --from-literal=MONGO_PORT=27017 \
             --from-literal=MONGO_DB=notification \
