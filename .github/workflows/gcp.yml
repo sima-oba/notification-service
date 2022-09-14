@@ -54,6 +54,7 @@ jobs:
         run: |-
           kubectl delete secret notification-secret --ignore-not-found=true -n sima
           kubectl create secret generic notification-secret \
+            --from-literal=SMTP_SERVER=$SMTP_SERVER \
             --from-literal=MONGO_HOST=mongodb.mongo.svc.cluster.local \
             --from-literal=MONGO_PORT=27017 \
             --from-literal=MONGO_DB=notification \
